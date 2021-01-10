@@ -133,22 +133,6 @@ const rotateToMax = n => {
 rotateToMax(123) // prints 123
 rotateToMax('123') // prints 123
 
-// <6kyu> array difference
-function arrayDiff(a, b) {
-    let newArr = [];
-  for (let i = 0; i < a.length;i++){
-      for (let j = 0; j < b.length;j++){
-          if (a[i].includes(b[j])){
-            continue;
-          } else {
-              newArr.push(b[j])
-          }
-      }
-  }
-  console.log(newArr)
-}
-arrayDiff([3,4], [3]);
-
 // <6kyu> unique in order
 function uniqueInOrder(str){
     let newArr;
@@ -170,5 +154,89 @@ function uniqueInOrder(str){
 let input1 = 'AABBCCDDAABB'; 
 uniqueInOrder(input1); // prints ['A','B','C','D','A','B']
 let input3 = [1,2,2,2,3,3];
-trim(input3); // prints [1,2,3]
+uniqueInOrder(input3); // prints [1,2,3]
 
+// <7kyu> descending order
+function descendingOrder(n){
+    console.log(Number(String(n).split('').sort((a,b)=>b-a).join('')))
+  }
+descendingOrder(12345); // prints 54321
+
+// <8kyu> warn the sheep
+function warnTheSheep(arr){
+    let n = arr.length;
+    let count = 0;
+
+    if (arr[n-1] == 'wolf'){
+        console.log('Pls go away and stop eating my sheep.');
+    } else {
+        for (let i = n; i > 0; i--){
+            if (arr[i] == 'sheep'){
+                count ++;
+            } else if (arr[i]== 'wolf'){
+                break;
+            }
+        }
+        console.log(`Oi! Sheep no. ${count}! You are about to be eaten by a wolf!`)
+    }
+}
+warnTheSheep(['sheep','sheep','wolf']); // prints 'Pls go away and stop eating my sheep.'
+warnTheSheep(['sheep','sheep','wolf','sheep','sheep']); // prints 'Oi! Sheep no. 2! You are about to be eaten by a wolf!'
+warnTheSheep(['sheep','sheep','wolf','sheep','sheep','sheep']); // prints 'Oi! Sheep no. 3! You are about to be eaten by a wolf!'
+warnTheSheep(['wolf','sheep','sheep','sheep','sheep','sheep']);
+
+// <6kyu> array diff
+function arrayDiff(a, b) {
+    let result = a.filter(x => b.includes(x) == false);
+    if (a.length > 0 && b.length > 0){
+        console.log(result);
+    } else {
+        console.log(a);
+    }
+}
+arrayDiff([1,2,2,2,3],[2,3]); // prints [1]
+arrayDiff([],[4,5]); // prints []
+arrayDiff([1,8,2],[]); // prints [1,8,2]
+
+/* more intuitive answer, not using filter
+function arrayDiff(a, b){
+    let newArr = [];
+    if (a.length > 0 && b.length > 0){
+        for (let i = 0; i < a.length; i++){
+            if (b.indexOf(a[i]) == -1){
+                newArr.push(a[i]);
+            }
+        }
+        console.log(newArr);
+    } else {
+        console.log(a);
+    }
+}
+*/
+
+// <7kyu> missing number
+// with sort
+function missingNumber(arr){
+   arr = arr.sort((a,b)=> a-b)
+    for (let i = 0; i < arr.length; i++){
+        if (arr[i] == i+1){
+            continue
+        } else if (arr[i] != i+1){
+            console.log(i+1);
+            break;
+        }
+    }
+}
+missingNumber([2,1,4,5]); // prints 3
+
+// without sort
+function missingNumber2(arr){
+    let result = [];
+    for (let i = 1; i <= arr.length+1; i++){
+        if (arr.includes(i) == false){
+            result.push(i)
+        }
+    }
+    console.log(result)
+}
+missingNumber2([2,1,4,5]); // prints 3
