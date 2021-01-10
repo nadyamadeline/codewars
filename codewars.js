@@ -231,12 +231,31 @@ missingNumber([2,1,4,5]); // prints 3
 
 // without sort
 function missingNumber2(arr){
-    let result = [];
+    let result = 0;
     for (let i = 1; i <= arr.length+1; i++){
         if (arr.includes(i) == false){
-            result.push(i)
+            result += i;
         }
     }
     console.log(result)
 }
 missingNumber2([2,1,4,5]); // prints 3
+
+// <7kyu> find missing number
+function findMissingNumbers(arr){
+    let result = [];
+    for (let i = Math.min(...arr); i <= Math.max(...arr); i++){
+        if (arr.indexOf(i) == -1){
+            result.push(i)
+            }
+        }
+        console.log(result)
+    }
+findMissingNumbers([-3,-2,1,5]); // prints [ -1, 0, 2, 3, 4 ]
+
+// <6kyu> your order, please
+function order(words){
+    let wordArr = words.split(' ').sort((a,b) => a.match(/[0-9]/) - b.match(/[0-9]/)).join(' '); // /[0-9]/ is regex to match for digits (numbers)
+    console.log(wordArr);
+  }
+order("is2 Thi1s T4est 3a"); // prints 'Thi1s is2 3a T4est'
